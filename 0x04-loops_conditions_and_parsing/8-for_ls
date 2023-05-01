@@ -2,9 +2,7 @@
 # Script that displays the contents of the current directory in list format.
 #   Only displays the part of the name after the first dash.
 
-for file in $(ls)
-do
-  if [ "${file:0:1}" != "." ] && [ "${file#*-}" != "${file}" ]; then
-    echo "${file#*-}"
-  fi
+for i in *; do
+  [[ $i == -* ]] && continue
+  echo "${i#*-}"
 done
