@@ -6,4 +6,4 @@ while IFS=: read -r username password uid gid user_info homedir shell; do
   "lives in $homedir and rides $shell."\
   "User ID's place is protected by the passcode $password,"\
   "more info about the user here: $user_info"
-done < /etc/passwd
+done < "/etc/passwd"
