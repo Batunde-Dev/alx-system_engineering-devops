@@ -1,0 +1,26 @@
+global
+        maxconn 2048
+        tune.ssl.default-dh-param 2048
+
+defaults
+        mode    http
+        timeout connect  5s
+        timeout client  10s
+        timeout server  10s
+        timeout http-request 10s
+
+frontend http_frontend
+        bind *:80
+        mode http
+        redirect scheme https unless { ssl_fc }
+
+frontend https_frontend
+        bind *:443 ssl crt /etc/haproxy/certs/www.wasiuoguntola.tech.pem
+        mode http
+        default_backend my_backend
+
+backend my_backend
+        balance roundrobin
+        mode http
+        server 453-web-01 100.25.13.27:80 check
+        server 453-web-02 52.201.162.134:80 check
