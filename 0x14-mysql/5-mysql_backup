@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# backup and compress my databases
+export MYSQL_PWD="$1"
+mysqldump --all-databases -u root > backup.sql
+day=$(date +"%d")
+month=$(date +"%m")
+year=$(date +"%Y")
+file_name="$day-$month-$year.tar.gz"
+tar -czvf "$file_name" backup.sql
